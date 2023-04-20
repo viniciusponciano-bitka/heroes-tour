@@ -1,6 +1,19 @@
 <h2>{{hero.name | uppercase}} Details</h2>
-<div><span>id: </span>{{hero.id}}</div>
 <div>
-    <label for="name">Hero name: </label>
-    <input id="name" [(ngModel)]="hero.name" placeholder="name">
+    <div><span>id: </span>{{hero.id}}</div>
+    <div>
+        <label for="name">Hero name: </label>
+        <input id="name" [(ngModel)]="hero.name" placeholder="name">
+    </div>
+    <div>
+        <label for="description">Description: </label>
+        <textarea id="description" [(ngModel)]="hero.description" placeholder="description"></textarea>
+    </div>
+    <div>
+        <label for="modified-at">Date of last update: </label>
+        <span id="modified-at">{{hero.modifiedAt | date}}</span>
+    </div>
+    <div>
+        <img *ngIf="!!hero.thumbnail" width="40%" src="{{hero.thumbnail}}" alt="Picture of {{hero.name}}">
+    </div>
 </div>
