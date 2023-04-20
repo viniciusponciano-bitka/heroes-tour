@@ -1,7 +1,7 @@
 <h2>Heroes</h2>
 <ul class="heroes">
     <li *ngFor="let hero of heroes">
-        <button type="button">
+        <button type="button" routerLink="{{hero.id}}">
             <span class="badge">{{hero.id}}</span>
             <span class="name">{{hero.name}}</span>
         </button>
