@@ -20,4 +20,10 @@ export class MarvelService {
 
     return this.httpClient.get<MarvelResponse>(url);
   }
+
+  getHero(heroId: number) {
+    const url = `${this.env.marvelUrl}${this.url}/${heroId}?apikey=${this.env.publicKey}`;
+
+    return this.httpClient.get<MarvelResponse>(url);
+  }
 }
