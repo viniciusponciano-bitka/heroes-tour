@@ -15,8 +15,8 @@ export class MarvelService {
     private httpClient: HttpClient,
   ) {}
 
-  getHeroes(): Observable<MarvelResponse> {
-    const url = `${this.env.marvelUrl}${this.url}?apikey=${this.env.publicKey}`;
+  getHeroes(offset: number = 0, limit: number = 20): Observable<MarvelResponse> {
+    const url = `${this.env.marvelUrl}${this.url}?apikey=${this.env.publicKey}&offset=${offset}&limit=${limit}`;
 
     return this.httpClient.get<MarvelResponse>(url);
   }

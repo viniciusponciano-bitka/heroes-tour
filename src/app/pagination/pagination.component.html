@@ -1,0 +1,14 @@
+<div class="container">
+    <button type="button" (click)="goToPage(0)">first</button>
+    <button type="button" (click)="goToPage(page-1)">back</button>
+    <input
+        type="number"
+        min="0"
+        max="{{total}}"
+        oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : 0"
+        [(ngModel)]="page"
+    >
+    <button type="button" (click)="goToPage(page+1)">forward</button>
+    <button type="button" (click)="goToPage(total)">last</button>
+</div>
+<p>{{page}}</p>
