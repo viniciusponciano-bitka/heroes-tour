@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Hero } from '../hero';
+import { MarvelService } from '../marvel.service';
+import { HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-heroes',
@@ -7,14 +9,23 @@ import { Hero } from '../hero';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent {
-  heroes: Hero[] = [
-    {
-      id: 1,
-      name: 'Storm',
-      description: 'She has the ability to fully control the weather.',
-      modifiedAt: '2016-05-26T11:50:27-0400',
-      thumbnail:
-        'http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d.jpg',
-    },
-  ];
+  heroes: Hero[] = [];
+
+  constructor(private heroService: MarvelService) {
+    heroService.getHeroes().subscribe((characters) => {
+      const isRequestSuccessful = characters.code === HttpStatusCode.Ok || characters.code === HttpStatusCode.NotModified;
+      if (isRequestSuccessful && characters.data?.results) {
+        for (let character of characters.data?.results) {
+          if (character.id && character.name) {
+            const hero = {
+              id: character.id,
+              name: character.name
+            }
+
+            this.heroes.push(hero);
+          }
+        }
+      }
+    });
+  }
 }
